@@ -10,7 +10,7 @@ object RetrofitClinet {
     val instance:Retrofit
         get() {
             if (ourInstance == null){
-                ourInstance = Builder().baseUrl("https://jsonplaceholder.typicode.com/posts").addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build()
+                ourInstance = Builder().baseUrl("https://jsonplaceholder.typicode.com/").addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build()
 
             }
             return ourInstance!!

@@ -15,12 +15,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+
     internal lateinit var jsonApi: IMyAPI
-    internal lateinit var compositeDisposable: CompositeDisposable
+    internal  var compositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
 //        Init API
         val retrofit = RetrofitClinet.instance

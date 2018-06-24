@@ -9,7 +9,7 @@ object RetrofitClinetPhotos {
     val instance:Retrofit
         get() {
             if (RetrofitClinetPhotos.ourInstance == null){
-                RetrofitClinetPhotos.ourInstance = Retrofit.Builder().baseUrl("https://jsonplaceholder.typicode.com/")
+                RetrofitClinetPhotos.ourInstance = Retrofit.Builder().baseUrl("http://bshairdammam.com/bs/api/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build()
 

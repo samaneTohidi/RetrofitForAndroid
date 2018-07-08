@@ -9,5 +9,6 @@ class PostViewHolderPhotos (itemViewPhoto:View):RecyclerView.ViewHolder(itemView
     val title_txt_photo = itemViewPhoto.txt_title_photo
     val id_txt = itemViewPhoto.txt_id
     val photos_thumbnail = itemViewPhoto.image_thumbnail
+    val photos_des_photo = itemViewPhoto.txt_des_photo
 
 }

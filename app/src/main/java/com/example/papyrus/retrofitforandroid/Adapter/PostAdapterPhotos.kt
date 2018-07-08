@@ -13,10 +13,11 @@ import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
 import android.graphics.Bitmap
+import android.text.Html
 import com.bumptech.glide.Glide
 
 
-class PostAdapterPhotos(internal var context: Context, internal var postListWithPhoto: List<PostWithPhotos>) : RecyclerView.Adapter<PostViewHolderPhotos>() {
+class PostAdapterPhotos(internal var context: Context, internal var postListWithPhoto: PostWithPhotos) : RecyclerView.Adapter<PostViewHolderPhotos>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolderPhotos {
         val itemViewPhoto = LayoutInflater.from(parent.context).inflate(R.layout.postphoto_layout, parent, false)
 
@@ -24,14 +25,17 @@ class PostAdapterPhotos(internal var context: Context, internal var postListWith
     }
 
     override fun getItemCount(): Int {
-        return postListWithPhoto.size
+        return postListWithPhoto.posts.size
     }
 
     override fun onBindViewHolder(holder: PostViewHolderPhotos, position: Int) {
-        holder.id_txt.text = postListWithPhoto[position].id.toString()
-        holder.title_txt_photo.text = postListWithPhoto[position].title
+        holder.id_txt.text = postListWithPhoto.posts[position].id.toString()
+        holder.title_txt_photo.text = postListWithPhoto.posts[position].title
+
+        holder.photos_des_photo.setText(Html.fromHtml(Html.fromHtml(postListWithPhoto.posts[position].content).toString()))
+
         val iv: ImageView = holder.photos_thumbnail
-        val fileUrl: String = postListWithPhoto[position].thumbnailUrl
+        val fileUrl: String = postListWithPhoto.posts[position].thumbnail
         Glide.with(context).load(fileUrl).into(iv)
 
 

@@ -1,6 +1,6 @@
 package com.example.papyrus.retrofitforandroid.Models
 
-class Post {
+class PostOld {
     var userId:Int = 0
     var id:Int = 0
     var title:String = ""

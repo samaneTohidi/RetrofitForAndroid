@@ -5,5 +5,6 @@ import retrofit2.http.GET
 
 interface IMyAPIPhotos {
     @get:GET("get_posts")
-    val postsPhoto:io.reactivex.Observable<List<PostWithPhotos>>
+    val postsPhoto:io.reactivex.Observable<PostWithPhotos>
+
 }

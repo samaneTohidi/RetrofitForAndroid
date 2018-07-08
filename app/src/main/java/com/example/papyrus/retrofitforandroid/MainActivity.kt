@@ -7,6 +7,7 @@ import android.widget.TextView
 import com.example.papyrus.retrofitforandroid.Adapter.PostAdapter
 import com.example.papyrus.retrofitforandroid.Adapter.PostAdapterPhotos
 import com.example.papyrus.retrofitforandroid.Models.Post
+import com.example.papyrus.retrofitforandroid.Models.PostOld
 import com.example.papyrus.retrofitforandroid.Models.PostWithPhotos
 import com.example.papyrus.retrofitforandroid.Retrofit.IMyAPI
 import com.example.papyrus.retrofitforandroid.Retrofit.IMyAPIPhotos
@@ -55,14 +56,14 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun displayDataPhoto(postsPhoto: List<PostWithPhotos>?) {
+    private fun displayDataPhoto(postsPhoto: PostWithPhotos?) {
         val adapterPhoto = PostAdapterPhotos(this, postsPhoto!!)
         recycler_posts_photos.adapter = adapterPhoto
 
     }
 
     //    نمايش اطلاعات و وصل كردن ادابتور
-    private fun displayData(posts: List<Post>?) {
+    private fun displayData(posts: List<PostOld>?) {
         val adapter = PostAdapter(this, posts!!)
         recycler_posts.adapter = adapter
 

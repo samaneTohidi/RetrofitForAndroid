@@ -2,9 +2,11 @@ package com.example.papyrus.retrofitforandroid.Retrofit
 
 import com.example.papyrus.retrofitforandroid.Models.PostWithPhotos
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface IMyAPIPhotos {
-    @get:GET("get_posts")
-    val postsPhoto:io.reactivex.Observable<PostWithPhotos>
+    @GET("get_posts")
+    fun postsPhoto(@Query("page") page: Int): io.reactivex.Observable<PostWithPhotos>
+
 
 }

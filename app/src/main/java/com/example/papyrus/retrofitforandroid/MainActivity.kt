@@ -3,6 +3,8 @@ package com.example.papyrus.retrofitforandroid
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.widget.TextView
 import com.example.papyrus.retrofitforandroid.Adapter.PostAdapter
 import com.example.papyrus.retrofitforandroid.Adapter.PostAdapterPhotos
@@ -17,9 +19,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
+import com.example.papyrus.retrofitforandroid.R.id.recycler_posts_photos
+
+
 
 class MainActivity : AppCompatActivity() {
 
+    var userPage:Int = 1
     internal lateinit var jsonApiPhotos: IMyAPIPhotos
     internal lateinit var jsonApi: IMyAPI
     internal var compositeDisposable = CompositeDisposable()
@@ -41,17 +47,31 @@ class MainActivity : AppCompatActivity() {
 //        View
         recycler_posts.setHasFixedSize(true)
         recycler_posts.layoutManager = LinearLayoutManager(this)
-
+        var tet = LinearLayoutManager(this)
         recycler_posts_photos.setHasFixedSize(true)
-        recycler_posts_photos.layoutManager = LinearLayoutManager(this)
-        fetchData()
+        recycler_posts_photos.layoutManager = tet
+
+        recycler_posts_photos.addOnScrollListener(object : EndlessRecyclerViewScrollListener(tet) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
+
+                var newTestPage = page + 1
+                fetchData(newTestPage)
+
+
+
+            }
+
+
+        })
+
+        fetchData(userPage)
 
     }
 
     //    براي نمايش اطلاعات در تردهاي مختلف
-    private fun fetchData() {
+    private fun fetchData(newPage:Int) {
         compositeDisposable.add(jsonApi.posts.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe { posts -> displayData(posts) })
-        compositeDisposablePhoto.add(jsonApiPhotos.postsPhoto.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe { postsPhoto -> displayDataPhoto(postsPhoto) })
+        compositeDisposablePhoto.add(jsonApiPhotos.postsPhoto(newPage).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe { postsPhoto -> displayDataPhoto(postsPhoto) })
 
 
     }

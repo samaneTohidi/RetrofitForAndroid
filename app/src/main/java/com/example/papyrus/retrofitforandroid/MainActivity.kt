@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.view.View
 import android.widget.TextView
 import com.example.papyrus.retrofitforandroid.Adapter.PostAdapter
 import com.example.papyrus.retrofitforandroid.Adapter.PostAdapterPhotos
@@ -58,6 +59,8 @@ class MainActivity : AppCompatActivity() {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
 
                 var newTestPage = page + 1
+                progressbar.visibility = View.VISIBLE
+
                 fetchData(newTestPage)
 
 
@@ -80,6 +83,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayDataPhoto(postsPhoto: PostWithPhotos?) {
+        progressbar.visibility = View.GONE
         adapterPhoto.addMoreItem(postsPhoto!!.posts)
 
 

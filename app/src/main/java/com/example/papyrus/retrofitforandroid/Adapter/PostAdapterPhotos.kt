@@ -15,9 +15,10 @@ import java.net.URL
 import android.graphics.Bitmap
 import android.text.Html
 import com.bumptech.glide.Glide
+import com.example.papyrus.retrofitforandroid.Models.Post
 
 
-class PostAdapterPhotos(internal var context: Context, internal var postListWithPhoto: PostWithPhotos) : RecyclerView.Adapter<PostViewHolderPhotos>() {
+class PostAdapterPhotos(internal var context: Context, internal var postListWithPhoto: ArrayList<Post>) : RecyclerView.Adapter<PostViewHolderPhotos>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolderPhotos {
         val itemViewPhoto = LayoutInflater.from(parent.context).inflate(R.layout.postphoto_layout, parent, false)
 
@@ -25,20 +26,25 @@ class PostAdapterPhotos(internal var context: Context, internal var postListWith
     }
 
     override fun getItemCount(): Int {
-        return postListWithPhoto.posts.size
+        return postListWithPhoto.size
     }
 
     override fun onBindViewHolder(holder: PostViewHolderPhotos, position: Int) {
-        holder.id_txt.text = postListWithPhoto.posts[position].id.toString()
-        holder.title_txt_photo.text = postListWithPhoto.posts[position].title
+        holder.id_txt.text = postListWithPhoto[position].id.toString()
+        holder.title_txt_photo.text = postListWithPhoto[position].title
 
-        holder.photos_des_photo.setText(Html.fromHtml(Html.fromHtml(postListWithPhoto.posts[position].content).toString()))
+        holder.photos_des_photo.setText(Html.fromHtml(Html.fromHtml(postListWithPhoto[position].content).toString()))
 
         val iv: ImageView = holder.photos_thumbnail
-        val fileUrl: String = postListWithPhoto.posts[position].thumbnail
+        val fileUrl: String = postListWithPhoto[position].thumbnail
         Glide.with(context).load(fileUrl).into(iv)
 
 
 
+    }
+
+    fun addMoreItem(posts: List<Post>) {
+        postListWithPhoto.addAll(posts)
+        this.notifyDataSetChanged()
     }
 }

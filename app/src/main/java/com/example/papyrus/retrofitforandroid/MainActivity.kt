@@ -30,11 +30,14 @@ class MainActivity : AppCompatActivity() {
     internal lateinit var jsonApi: IMyAPI
     internal var compositeDisposable = CompositeDisposable()
     internal var compositeDisposablePhoto = CompositeDisposable()
+    internal lateinit var adapterPhoto: PostAdapterPhotos
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        adapterPhoto = PostAdapterPhotos(this, ArrayList())
+        recycler_posts_photos.adapter = adapterPhoto
 
 //        Init API
         val retrofit = RetrofitClinet.instance
@@ -77,8 +80,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayDataPhoto(postsPhoto: PostWithPhotos?) {
-        val adapterPhoto = PostAdapterPhotos(this, postsPhoto!!)
-        recycler_posts_photos.adapter = adapterPhoto
+        adapterPhoto.addMoreItem(postsPhoto!!.posts)
+
 
     }
 

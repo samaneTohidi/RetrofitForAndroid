@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_1"
+            android:icon="@drawable/ic_sentiment_neutral_black_24dp"
+            android:title="إعلانات" />
+        <item
+            android:id="@+id/nav_2"
+            android:icon="@drawable/ic_sentiment_neutral_black_24dp"
+            android:title="إعلانات" />
+        <item
+            android:id="@+id/nav_3"
+            android:icon="@drawable/ic_sentiment_neutral_black_24dp"
+            android:title="إعلانات" />
+        <item
+            android:id="@+id/nav_4"
+            android:icon="@drawable/ic_sentiment_neutral_black_24dp"
+            android:title="إعلانات" />
+
+    </group>
+
+    <item android:title="المداخل الرئيسية">
+        <menu>
+            <item
+                android:id="@+id/nav_5"
+                android:icon="@drawable/ic_sentiment_neutral_black_24dp"
+                android:title="إعلانات" />
+            <item
+                android:id="@+id/nav_6"
+                android:icon="@drawable/ic_sentiment_neutral_black_24dp"
+                android:title="إعلانات" />
+        </menu>
+    </item>
+
+</menu>

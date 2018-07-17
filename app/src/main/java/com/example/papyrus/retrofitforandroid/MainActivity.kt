@@ -2,9 +2,13 @@ package com.example.papyrus.retrofitforandroid
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
+import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import com.example.papyrus.retrofitforandroid.Adapter.PostAdapter
@@ -21,10 +25,11 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import com.example.papyrus.retrofitforandroid.R.id.recycler_posts_photos
+import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.list_main.*
 
 
-
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
 
     var userPage:Int = 1
     internal lateinit var jsonApiPhotos: IMyAPIPhotos
@@ -36,6 +41,23 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //toolbar
+        setSupportActionBar(toolbar)
+
+        //drawer
+        var toggle= ActionBarDrawerToggle(
+                this, drawer_layout, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        )
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
+        nav_view.setNavigationItemSelectedListener(this)
+
+
+
+
+
+
 
         adapterPhoto = PostAdapterPhotos(this, ArrayList())
         recycler_posts_photos.adapter = adapterPhoto
@@ -95,4 +117,37 @@ class MainActivity : AppCompatActivity() {
         recycler_posts.adapter = adapter
 
     }
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_1 -> {
+                // Handle the camera action
+            }
+            R.id.nav_2 -> {
+
+            }
+            R.id.nav_3 -> {
+
+            }
+            R.id.nav_4 -> {
+
+            }
+            R.id.nav_5 -> {
+
+            }
+            R.id.nav_6 -> {
+
+            }
+        }
+
+        drawer_layout.closeDrawer(GravityCompat.START)
+        return true
+    }
+
 }
